@@ -17,7 +17,7 @@ All results below were measured against the exact `contracts/StepOrder.py` inclu
 | Accepted-state preflight tests | PASS | Existing arrangement blocked; explicit not-found allowed; RPC error propagated |
 | Source SHA-256 | PASS | `612bf869931b37751eee5b69bea85506eb2828a0a41c50aeed6ec8334c22a167` |
 | Calldata probe | PASS, return code 0 | 10/10 `eth_estimateGas` calls accepted; GenVM payloads 120–152 bytes |
-| Production frontend build | PASS, return code 0 | `tsc -b && vite build`; 480 modules transformed |
+| Production frontend build | PASS, return code 0 | `tsc -b && vite build`; 481 modules transformed |
 
 Total automated test functions: **26 passed**. The 12 parity vectors are assertions inside the measured parity test, not inflated into twelve separate test-function claims.
 
@@ -56,9 +56,16 @@ npm run verify:source
 - Final accepted-state reads confirm both arrangements are `COMPLETE`, both confirmation flags are `true`, and the recorded first movers are `AUTHOR` for F4 and `OTHER` for O4.
 - MV-2 passed: F1 returned `AUTHOR_FIRST`; O5 returned `OTHER_FIRST`; both accepted-state reads match their transaction outputs.
 
-## CẦN NGƯỜI DÙNG HOÀN TẤT
+## STUDIO NET RUNTIME — PROJECT COMPLETE
 
-The Intelligent Contract runtime checklist is complete. The separate Project deployment is finalized at `0x1d9d229ba1Ff0b0ef6A0aFcAdAD6dFd08Db6ee26`. The remaining manual work is only six wallet-signed frontend steps. Record their transaction hashes/results, accepted post-states, and three screenshots in `RUNTIME_EVIDENCE.md`.
+The separate Project deployment is finalized at `0x1d9d229ba1Ff0b0ef6A0aFcAdAD6dFd08Db6ee26`, which is different from the Intelligent Contract submission address. The six-step frontend review path passed on `2026-09-28` with author wallet `0x3065E31B1D993d7C0D59E6786844cBa56780B2d3` and named other wallet `0x5a52d040581A76e2C032542855D31480f2ea7097`:
+
+- F4 opened as `AUTHOR_FIRST`; the named other's premature action was disabled with `The author moves first`.
+- The author moved first, accepted state reached `HALF_DONE`, and `first_mover=AUTHOR` was displayed.
+- The named other completed the arrangement; accepted state reached `COMPLETE` with both confirmations true.
+- O4 opened as `OTHER_FIRST`; the author's premature action was disabled with `The other side moves first`.
+
+The successful accepted states and both exact UI guards are recorded in `RUNTIME_EVIDENCE.md`. Full Project write hashes were not visible in the supplied screenshots and are explicitly marked `HASH NOT CAPTURED`; no hash has been inferred or invented.
 
 Stop immediately and report the observed result if either F4/O4 or F1/O5 receives the same verdict. Do not edit the rubric to make a failed case pass.
 

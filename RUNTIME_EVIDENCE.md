@@ -59,9 +59,31 @@ The author wallet intentionally called `confirm_other` on O4. Transaction [`0xec
 - Deployment transaction: [`0x41d035...067f0`](https://explorer-studio.genlayer.com/tx/0x41d035e2287e9720a47083193cd9bdd3946555ffe9c1983eabe9ee9f368067f0)
 - Observed result: `FINALIZED`, GenVM `SUCCESS`, consensus `Accepted`
 - Address separation: PASS — it differs from the StepOrder IC address `0xDC51b49aF143eFb6671b23C8a4860ab6F17DF72B`
-- Project interaction testing: `NOT RUN` until completed through the frontend.
+- Live application: [`https://first-move-amber.vercel.app`](https://first-move-amber.vercel.app)
+- Frontend author wallet: `0x3065E31B1D993d7C0D59E6786844cBa56780B2d3`
+- Frontend named other wallet: `0x5a52d040581A76e2C032542855D31480f2ea7097`
+- Project interaction testing: `PASS` on `2026-09-28` through the deployed frontend.
 
-Run through the frontend: branch A steps 1–4 and branch B steps 5–6 from the table
-above. Record each new Project transaction hash and accepted post-state here. Capture exactly three
-screenshots: the disabled wrong-order button for each opposite order, and one `COMPLETE` arrangement
-with `first_mover` visible.
+### Frontend runtime results
+
+| # | Connected wallet | Action | Observed accepted state or UI guard | Transaction hash |
+|---:|---|---|---|---|
+| 1 | author | Open F4: `Nothing is owed until the work is handed over.` | `AUTHOR_FIRST`, `OPEN`; waiting on `the author` | `HASH NOT CAPTURED` |
+| 2 | named other | Attempt the other-side confirmation before the author | Button disabled before signing with exact reason `The author moves first` | No transaction submitted |
+| 3 | author | Confirm author with note `Author completed the required first move.` | `HALF_DONE`; author confirmed; `first_mover=AUTHOR`; waiting on `the Buyer` | `HASH NOT CAPTURED` |
+| 4 | named other | Confirm other with note `Buyer completed the required second move.` | `COMPLETE`; both sides confirmed; `first_mover=AUTHOR` | `HASH NOT CAPTURED` |
+| 5 | author | Open O4: `We will not begin until we are paid.` | `OTHER_FIRST`, `OPEN`; waiting on `the Buyer` | `HASH NOT CAPTURED` |
+| 6 | author | Attempt the author confirmation before the other side | Button disabled before signing with exact reason `The other side moves first` | No transaction submitted |
+
+Frontend arrangement IDs:
+
+- F4: `e157499136170fe3c10db66e637db19946b07dfab0c3b524bc1252b7f4900a19`
+- O4: `b0338276f2a7789ef9b4a8565ff315ee58cc3d6dfb3b18015c46b061fcec41c0`
+
+The three retained screenshots show: the F4 wrong-order guard while the named other wallet is
+connected; the completed F4 arrangement with `FIRST: AUTHOR`; and the O4 wrong-order guard while the
+author wallet is connected. The screenshots were supplied separately from the source repository.
+
+This frontend run proves both opposite semantic verdicts, both exact client-side ordering guards,
+the valid first transition to `HALF_DONE`, and the valid second transition to `COMPLETE`. The UI never
+submitted either blocked wrong-order action.
