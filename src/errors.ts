@@ -1,3 +1,5 @@
+import { contractReceiptMessage } from './rpc-errors.mjs'
+
 const collect = (error: unknown, depth = 0): string[] => {
   if (depth > 6 || error == null) return []
   const value = error as any
@@ -32,6 +34,9 @@ export function extractRollback(raw: string) {
 }
 
 export function normalizeError(error: unknown) {
+  const receiptMessage = contractReceiptMessage(error)
+  if (receiptMessage) return receiptMessage
+
   const candidates = collect(error)
   const joined = candidates.join('\n')
   const rollback = extractRollback(joined)

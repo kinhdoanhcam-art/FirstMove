@@ -10,7 +10,7 @@ All results below were measured against the exact `contracts/StepOrder.py` inclu
 | Rubric overlap gate | PASS, return code 0 | Zero content words shared with the ten semantic cases |
 | Manual rubric read | PASS | The rubric does not name negation, temporal conjunctions, grammatical subject, or event-anchored timing categories used by the case set |
 | `genvm-linter lint` | PASS, return code 0 | 3 checks passed, 0 warnings |
-| JavaScript utility/package tests | PASS, return code 0 | 9 tests passed |
+| JavaScript utility/package tests | PASS, return code 0 | 11 tests passed |
 | Python deterministic and source tests | PASS, return code 0 | 15 tests passed: 9 state-machine negative tests and 6 static contract gates |
 | Python text parity coverage | PASS | 12 strip cases plus normalization and Unicode code-point length; includes U+001C–U+001F and U+0085 |
 | HTML escape test | PASS | Contract-provided tag, quote, apostrophe, and ampersand characters are escaped |
@@ -19,7 +19,7 @@ All results below were measured against the exact `contracts/StepOrder.py` inclu
 | Calldata probe | PASS, return code 0 | 10/10 `eth_estimateGas` calls accepted; GenVM payloads 120–152 bytes |
 | Production frontend build | PASS, return code 0 | `tsc -b && vite build`; 480 modules transformed |
 
-Total automated test functions: **24 passed**. The 12 parity vectors are assertions inside the measured parity test, not inflated into twelve separate test-function claims.
+Total automated test functions: **26 passed**. The 12 parity vectors are assertions inside the measured parity test, not inflated into twelve separate test-function claims.
 
 Commands:
 

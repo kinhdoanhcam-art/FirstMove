@@ -7,6 +7,7 @@
 - Added a 512 px PNG logo, production build configuration, Vercel rewrite, lockfile, and CI workflow.
 - Recorded MV-2 and the 10/10 calldata probe without changing the frozen contract source.
 - Bound the Project build to its separate finalized deployment at `0x1d9d229ba1Ff0b0ef6A0aFcAdAD6dFd08Db6ee26`.
+- Decoded nested Base64 GenLayer `UserError` receipts so the accepted-state duplicate preflight recognizes `Arrangement not found` without hiding transport errors.
 
 ## 2026-09-28 — StudioNet MV-1 runtime evidence
 

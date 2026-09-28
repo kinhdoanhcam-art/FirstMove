@@ -10,3 +10,7 @@ declare module './preflight.mjs' {
     arrangementId: string,
   ): Promise<true>
 }
+
+declare module './rpc-errors.mjs' {
+  export function contractReceiptMessage(error: unknown): string
+}
